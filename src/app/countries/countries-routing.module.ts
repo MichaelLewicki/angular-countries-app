@@ -12,21 +12,27 @@ const routes : Routes = [
     component: ByCapitalPageComponent
   },
   {
-    path: 'by-region',
-    component: ByRegionPageComponent
-  },
-  {
     path: 'by-country',
     component: ByCountryPageComponent
   },
   {
+    path: 'by-region',
+    component: ByRegionPageComponent
+  },
+  {
     path: 'by/:id',
     component: CountryPageComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'by-capital'
   }
 ];
 
 @NgModule({
   imports: [
+    //cuando ya existe un route principal, todos los demás serán forChild
+    //en este caso, queremos que aparezcan estas rutas como recursos de /countries/recurso
     RouterModule.forChild( routes )
   ],
   exports: [
