@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({providedIn: 'root'})
@@ -12,7 +12,13 @@ export class CountriesService {
 
   public searchCapital( queryRequest: string ) : Observable<Country[]> {
     const path: string = `${this.apiUrl}/capital/${queryRequest}`;
-    return this.httpClient.get<Country[]>( path );
+    return this.httpClient.get<Country[]>( path )
+    .pipe(
+      catchError(error =>
+         //of es una clase de rxjs que nos permite construir un observable rápidamente a partir de un objeto dado
+        of([]) //estamos devolviendo un array vacío
+      )
+    );
   };
 
 
