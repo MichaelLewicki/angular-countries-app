@@ -15,10 +15,6 @@
   <div class="col">
     <!-- result table -->
     <hr>
-    <ul>
-      <li *ngFor="let country of countries">
-        {{country.name.nativeName.spa?.official}} - {{country.population}}
-      </li>
-    </ul>
+    <countries-table [countries]="countries"></countries-table>
   </div>
 </div>
