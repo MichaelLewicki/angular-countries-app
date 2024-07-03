@@ -10,8 +10,8 @@ export class CountriesService {
 
   constructor(private httpClient: HttpClient) { };
 
-  public searchCapital( queryRequest: string ) : Observable<Country[]> {
-    const path: string = `${this.apiUrl}/capital/${queryRequest}`;
+  public searchCapital( capitalRequest: string ) : Observable<Country[]> {
+    const path: string = `${this.apiUrl}/capital/${capitalRequest}`;
     return this.httpClient.get<Country[]>( path )
     .pipe(
       catchError(error =>
@@ -20,6 +20,25 @@ export class CountriesService {
       )
     );
   };
+
+  public searchCountry(countryRequest: string) : Observable<Country[]> {
+    const path: string = `${this.apiUrl}/name/${countryRequest}`;
+    return this.httpClient.get<Country[]>(path).pipe(
+      catchError(error =>
+        of([])
+      )
+    );
+  };
+
+  public searchRegion(regionRequest: string) : Observable<Country[]> {
+    const pathVariable: string = `${this.apiUrl}/region/${regionRequest}`;
+    return this.httpClient.get<Country[]>(pathVariable).pipe(
+      catchError(error =>
+        of([])
+      )
+    );
+  };
+
 
 
 };
